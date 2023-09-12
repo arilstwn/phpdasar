@@ -1,4 +1,5 @@
-<?php include( 'connect.php' ) ?>
+<?php 
+include 'connect.php' ?>
 <!DOCTYPE html>
 <html lang = 'en'>
 
@@ -34,7 +35,8 @@ integrity = 'sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhb
 <th scope = 'col'>NISN</th>
 <th scope = 'col'>Gender</th>
 <th scope = 'col'>Kelas</th>
-<th scope = 'col'>Nama Sekolahan</th>
+<th scope = 'col'>Nama Sekolah</th>
+<th class="text-center">Aksi</th>
 
 </tr>
 </thead>
@@ -52,13 +54,24 @@ foreach ($result as $row) :
             <td><?= $row['nisn']; ?></td>
             <td><?= $row['gender']; ?></td>
             <td><?= $row['tingkat_kelas'].' '.$row['jurusan_kelas']; ?></td>
-            <td><?= $row['jurusan_kelas'].' '.$row['nama_sekolah']; ?></td>
+            <td><?= $row['nama_sekolah'];  ?></td>
             <td class="text-center">
+              <a href="<?= 'detail.php?id='.$row['id_siswa']; ?>" class="btn btn-sm btn-primary">Detail</a>
+              <button onClick="<?= 'hapus('.$row['id_siswa'].')'; ?>" class="btn btn-sm btn-denger">Delete</button>
             </td>
             </tr>
             <?php endforeach; ?>
       </tbody>
     </table>
+    <a href="create.php" class="btn btn-sm btn-primary">Tambah</a>
   </div>
+  <script>
+function hapus( id ) {
+    var yes = confirm( 'Yakin Di Hapus?' );
+    if ( yes === true ) {
+        window.location.href = 'delete.php?id=' + id;
+    }
+}
+</script>
 </body>
 </html
